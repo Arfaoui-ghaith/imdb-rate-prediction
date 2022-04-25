@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>IMDB Rate Prediction</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{{ url_for('static',filename='vendor/animate.css/animate.min.css')}}" rel="stylesheet">
+  <link href="{{ url_for('static',filename='vendor/aos/aos.css')}}" rel="stylesheet">
+  <link href="{{ url_for('static',filename='vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+  <link href="{{ url_for('static',filename='vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
+  <link href="{{ url_for('static',filename='vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
+  <link href="{{ url_for('static',filename='vendor/glightbox/css/glightbox.min.css')}}" rel="stylesheet">
+  <link href="{{ url_for('static',filename='vendor/remixicon/remixicon.css')}}" rel="stylesheet">
+  <link href="{{ url_for('static',filename='vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+
+  <!-- =======================================================
+  * Template Name: Anyar - v4.7.1
+  * Template URL: https://bootstrapmade.com/anyar-free-multipurpose-one-page-bootstrap-theme/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+
+  <script>
+    let div = document.getElementById("predict")
+    console.log(div);
+
+  </script>
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center ">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <h1 class="logo"><a href="index.html">IMDB Rate Prediction</a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href=index.html" class="logo"><img src="{{ url_for('static',filename='img/logo.png')}}" alt="" class="img-fluid"></a>-->
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="#about">Dataset</a></li>
+          <li><a class="nav-link scrollto" href="#algorithms">Algorithms</a></li>
+          <li><a class="nav-link scrollto " href="#technologies">Technologies</a></li>
+          
+          <li><a class="nav-link scrollto" href="#faq">FAQ</a></li>
+    
+          <li class="dropdown"><a href="#"><span>Predict With</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="#">Decision Tree</a></li>
+              <li><a href="#">KNN</a></li>
+              <li><a href="#">Naive Bayes</a></li>
+              <li><a href="#">K-Means</a></li>
+            </ul>
+          </li>
+          
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex justify-cntent-center align-items-center">
+    <div id="heroCarousel" data-bs-interval="5000" class="container carousel carousel-fade" data-bs-ride="carousel">
+
+      <!-- Slide 1 -->
+      <div class="carousel-item active">
+        <div class="carousel-container">
+          <h2 class="animate__animated animate__fadeInDown">Welcome to <span>IMDB Rate Prediction</span></h2>
+          <p class="animate__animated animate__fadeInUp">My name is <strong>Arfaoui Ghaith</strong>, let’s take a look at how I used supervised and unsupervised machine learning to predict IMDb movie ratings.</p>
+          
+        </div>
+      </div>
+
+    </div>
+  </section><!-- End Hero -->
+
+  <main id="main">
+
+    <!-- ======= About Us Section ======= -->
+    <section id="about" class="about">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>About Dataset</h2>
+          <p>Every dataset has a story and this set is pulled from IMDb.com of all the Indian movies on the platform. Clean this data by removing missing values or adding average values this process will help to manipulate the data to help with your project.</p>
+        </div>
+
+        <div class="row content">
+          <div class="col-lg-6">
+            <p>
+              This dataset contains:
+            </p>
+            <ul>
+              <li><i class="ri-check-double-line"></i> <strong>Name of Movie</strong> - 13838 unique values.</li>
+              <li><i class="ri-check-double-line"></i> <strong>Year Movie was released</strong> - 3% null values - 3% (2019) values - 94% the rest of values.</li>
+              <li><i class="ri-check-double-line"></i> <strong>Time duration of Movie in minutes</strong> - 53% null values - 2% (120 min) values - 45% the rest of the values.</li>
+              <li><i class="ri-check-double-line"></i> <strong>Different Genre of Movies</strong> - 12% null values - 18% (Drama) values - 70% the rest of the values.</li>
+              <li><i class="ri-check-double-line"></i> <strong>Rating given to Movie</strong> - 49% null values - 51% the rest of the values.</li>
+              <li><i class="ri-check-double-line"></i> <strong>Votes given to Movie</strong> - 49% null values - 51% the rest of the values.</li>
+            </ul>
+          </div>
+          <div class="col-lg-6 pt-4 pt-lg-0">
+            <p>
+              This Dataset from <a href="https://www.kaggle.com" target="_blank">kaggle.com </a>
+            </p>
+            <ul>
+              <li><i class="bi bi-dot"></i> <strong>Usability</strong> 10.00</li>
+              <li><i class="bi bi-dot"></i> <strong>License</strong> <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank">CC0: Public Domain</a>.</li>
+              <li><i class="bi bi-dot"></i> <strong>update frequency</strong> Quarterly.</li>
+              
+            </ul>
+            <a href="https://www.kaggle.com/datasets/adrianmcmahon/imdb-india-movies" target="_blank" class="btn-learn-more">More Details</a>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End About Us Section -->
+
+    <!-- ======= Why Us Section ======= -->
+    <section id="algorithms" class="why-us">
+      <div class="container-fluid">
+
+        <div class="row">
+
+          <div class="col-lg-5 align-items-stretch position-relative video-box"  data-aos="fade-right">
+            <a href="https://www.youtube.com/watch?v=gmvvaobm7eQ" class="glightbox play-btn mb-4"></a>
+          </div>
+
+          <div class="col-lg-7 d-flex flex-column justify-content-center align-items-stretch" data-aos="fade-left">
+
+            <div class="content">
+              <h3>what are the algorithms used in this <strong>machine learning</strong> project</h3>
+              <p>
+                In a world where nearly all manual tasks are being automated, the definition of manual is changing. Machine Learning algorithms can help computers play chess, perform surgeries, and get smarter and more personal.
+              </p>
+            </div>
+
+            <div class="accordion-list">
+              <ul>
+                <li data-aos="fade-up" data-aos-delay="100">
+                  <a data-bs-toggle="collapse" class="collapse" data-bs-target="#accordion-list-1"><span>01</span> Decision Tree <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                  <div id="accordion-list-1" class="collapse show" data-bs-parent=".accordion-list">
+                    <p>
+                      Decision Trees (DTs) are a non-parametric supervised learning method used for classification and regression. The goal is to create a model that predicts the value of a target variable by learning simple decision rules inferred from the data features. A tree can be seen as a piecewise constant approximation.
+                    </p>
+                  </div>
+                </li>
+
+                <li data-aos="fade-up" data-aos-delay="200">
+                  <a data-bs-toggle="collapse" data-bs-target="#accordion-list-2" class="collapsed"><span>02</span> Naive Bayes <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                  <div id="accordion-list-2" class="collapse" data-bs-parent=".accordion-list">
+                    <p>
+                      Naive Bayes Classifier est un algorithme populaire en Machine Learning. C’est un algorithme du Supervised Learning utilisé pour la classification. Il est particulièrement utile pour les problématiques de classification de texte. Un exemple d’utilisation du Naive Bayes est celui du filtre anti-spam.
+                    </p>
+                  </div>
+                </li>
+
+                <li data-aos="fade-up" data-aos-delay="300">
+                  <a data-bs-toggle="collapse" data-bs-target="#accordion-list-3" class="collapsed"><span>03</span> k-Nearest Neighbors algorithm <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                  <div id="accordion-list-3" class="collapse" data-bs-parent=".accordion-list">
+                    <p>
+                      KNN works by finding the distances between a query and all the examples in the data, selecting the specified number examples (K) closest to the query, then votes for the most frequent label (in the case of classification) or averages the labels (in the case of regression).
+                    </p>
+                  </div>
+                </li>
+
+                <li data-aos="fade-up" data-aos-delay="300">
+                  <a data-bs-toggle="collapse" data-bs-target="#accordion-list-3" class="collapsed"><span>03</span> K-means <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                  <div id="accordion-list-3" class="collapse" data-bs-parent=".accordion-list">
+                    <p>
+                      K-means clustering is the unsupervised machine learning algorithm that is part of a much deep pool of data techniques and operations in the realm of Data Science. It is the fastest and most efficient algorithm to categorize data points into groups even when very little information is available about data.
+                    </p>
+                  </div>
+                </li>
+
+              </ul>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Why Us Section -->
+
+    <!-- ======= Services Section ======= -->
+    <section id="technologies" class="services">
+      <div class="container" data-aos="zoom-in">
+
+        <div class="section-title">
+          <h2>Technologies used in project</h2>
+          <p>Here is a list open source technologies you can use to take your machine learning projects to the next level.</p>
+        </div>
+    
+            <div class="clients-slider swiper">
+              <div class="swiper-wrapper align-items-center">
+                <div class="swiper-slide"><img src="{{ url_for('static',filename='img/python-logo.png')}}" class="img-fluid" alt=""></div>
+                <div class="swiper-slide"><img src="{{ url_for('static',filename='img/GitHub_Logo.png')}}" class="img-fluid" alt=""></div>
+                <div class="swiper-slide"><img src="{{ url_for('static',filename='img/scikit-learn1.jpg')}}" class="img-fluid" alt=""></div>
+                <div class="swiper-slide"><img src="{{ url_for('static',filename='img/image-27.png')}}" class="img-fluid" alt=""></div>
+                <div class="swiper-slide"><img src="{{ url_for('static',filename='img/code-stable.png')}}" class="img-fluid" alt=""></div>
+                <div class="swiper-slide"><img src="{{ url_for('static',filename='img/images.png')}}" class="img-fluid" alt=""></div>
+                <div class="swiper-slide"><img src="{{ url_for('static',filename='img/postman-inc-logo-vector.png')}}" class="img-fluid" alt=""></div>
+                
+              </div>
+              
+            </div>
+
+      </div>
+    </section><!-- End Services Section -->
+
+    <!-- ======= Cta Section ======= -->
+    <section id="cta" class="cta">
+      <div class="container">
+
+        <div class="row" data-aos="zoom-in">
+          <div class="col-lg-9 text-center text-lg-start">
+            <h3>Code Source</h3>
+            <p> The code source of this project hosted in github.</p>
+          </div>
+          <div class="col-lg-3 cta-btn-container text-center">
+            <a class="cta-btn align-middle" href="https://github.com/Arfaoui-ghaith/imdb-rate-prediction">Download</a>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Cta Section -->
+
+    <!-- ======= Frequently Asked Questions Section ======= -->
+    <section id="faq" class="faq section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Frequently Asked Questions</h2>
+        </div>
+
+        <div class="faq-list">
+          <ul>
+            <li data-aos="fade-up" data-aos="fade-up" data-aos-delay="100">
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-1">Why was Machine Learning Introduced? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <div id="faq-list-1" class="collapse show" data-bs-parent=".faq-list">
+                <p>
+                  The simplest answer is to make our lives easier. In the early days of “intelligent” applications, many systems used hardcoded rules of “if” and “else” decisions to process data or adjust the user input. Think of a spam filter whose job is to move the appropriate incoming email messages to a spam folder. <br/>
+                  But with the machine learning algorithms, we are given ample information for the data to learn and identify the patterns from the data. <br/>
+                  Unlike the normal problems we don’t need to write the new rules for each problem in machine learning, we just need to use the same workflow but with a different dataset.
+                </p>
+              </div>
+            </li>
+
+            <li data-aos="fade-up" data-aos-delay="200">
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-2" class="collapsed">What are Different Types of Machine Learning algorithms? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <div id="faq-list-2" class="collapse" data-bs-parent=".faq-list">
+                <p>
+                  There are various types of machine learning algorithms. Here is the list of them in a broad category based on:<br/>
+                  Whether they are trained with human supervision (Supervised, unsupervised, reinforcement learning)<br/>
+                  The criteria in the below diagram are not exclusive, we can combine them any way we like.
+                </p>
+              </div>
+            </li>
+
+            <li data-aos="fade-up" data-aos-delay="300">
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-3" class="collapsed">What is Supervised Learning? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <div id="faq-list-3" class="collapse" data-bs-parent=".faq-list">
+                <p>
+                  Supervised learning is a machine learning algorithm of inferring a function from labeled training data. The training data consists of a set of training examples.
+                </p>
+              </div>
+            </li>
+
+            <li data-aos="fade-up" data-aos-delay="400">
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-4" class="collapsed">What is Unsupervised Learning? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <div id="faq-list-4" class="collapse" data-bs-parent=".faq-list">
+                <p>
+                  Unsupervised learning is also a type of machine learning algorithm used to find patterns on the set of data given. In this, we don’t have any dependent variable or label to predict. Unsupervised Learning Algorithms:<br/>
+                  Clustering, Anomaly Detection, Neural Networks and Latent Variable Models.
+                </p>
+              </div>
+            </li>
+
+            <li data-aos="fade-up" data-aos-delay="500">
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-5" class="collapsed">Explain the Difference Between Classification and Regression? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <div id="faq-list-5" class="collapse" data-bs-parent=".faq-list">
+                <br>
+                  Classification is used to produce discrete results, classification is used to classify data into some specific categories.
+                  For example, classifying emails into spam and non-spam categories.<br/><br/>
+                  Whereas, regression deals with continuous data.<br/>
+                  For example, predicting stock prices at a certain point in time.<br/><br/>
+                  Classification is used to predict the output into a group of classes.</br>
+                  For example, Is it Hot or Cold tomorrow?<br/><br/>
+                  Whereas, regression is used to predict the relationship that data represents.<br/>
+                  For example, What is the temperature tomorrow?
+                </p>
+              </div>
+            </li>
+
+          </ul>
+        </div>
+
+      </div>
+    </section><!-- End Frequently Asked Questions Section -->
+
+    <!-- ======= Contact Section ======= -->
+    <section id="predict" class="contact">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Predict With <span id="algo"></span></h2>
+        </div>
+
+        <div class="row mt-1 d-flex justify-content-end" data-aos="fade-right" data-aos-delay="100">
+
+          <div class="col-lg-5">
+            <div class="info">
+              <div class="address">
+                <i class="bi bi-geo-alt"></i>
+                <h4>Location:</h4>
+                <p>A108 Adam Street, New York, NY 535022</p>
+              </div>
+
+              <div class="email">
+                <i class="bi bi-envelope"></i>
+                <h4>Email:</h4>
+                <p>info@example.com</p>
+              </div>
+
+              <div class="phone">
+                <i class="bi bi-phone"></i>
+                <h4>Call:</h4>
+                <p>+1 5589 55488 55s</p>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="col-lg-6 mt-5 mt-lg-0" data-aos="fade-left" data-aos-delay="100">
+
+            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+                </div>
+                <div class="col-md-6 form-group mt-3 mt-md-0">
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                </div>
+              </div>
+              <div class="form-group mt-3">
+                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+              </div>
+              <div class="form-group mt-3">
+                <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+              </div>
+              <div class="my-3">
+                <div class="loading">Loading</div>
+                <div class="error-message"></div>
+                <div class="sent-message">Your message has been sent. Thank you!</div>
+              </div>
+              <div class="text-center"><button type="submit">Send Message</button></div>
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>Arfaoui Ghaith</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/anyar-free-multipurpose-one-page-bootstrap-theme/ -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{{ url_for('static',filename='vendor/aos/aos.js')}}"></script>
+  <script src="{{ url_for('static',filename='vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{ url_for('static',filename='vendor/glightbox/js/glightbox.min.js')}}"></script>
+  <script src="{{ url_for('static',filename='vendor/isotope-layout/isotope.pkgd.min.js')}}"></script>
+  <script src="{{ url_for('static',filename='vendor/swiper/swiper-bundle.min.js')}}"></script>
+  <script src="{{ url_for('static',filename='vendor/php-email-form/validate.js')}}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{{ url_for('static',filename='js/main.js')}}"></script>
+
+  
+
+</body>
+
+</html>
