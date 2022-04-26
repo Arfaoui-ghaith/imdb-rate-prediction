@@ -7,6 +7,14 @@
 (async function() {
   "use strict";
 
+  let genreList = await axios.get('http://localhost:5000/genrelist')
+  console.log(genreList.data)
+
+  let options = `<option value='${Object.values(genreList.data)[0]*1}' >${Object.keys(genreList.data)[0]}</option>`
+  for(let i=1; i<Object.keys(genreList.data).length;i++){
+    options = `<option value='${Object.values(genreList.data)[i]*1}' >${Object.keys(genreList.data)[i]}</option>`
+  }
+
   let div = document.getElementById("predict");
   let tree = document.getElementById("tree");
   let knn = document.getElementById("knn");
@@ -23,33 +31,57 @@
 
     <div class="row mt-1 d-flex justify-content-center" data-aos="fade-right" data-aos-delay="100">
       <div class="col-lg-6 mt-5 mt-lg-0" data-aos="fade-left" data-aos-delay="100">
-        <form method="post" role="form" class="php-email-form">
+        <div class="php-email-form">
           
           <div class="form-group mt-3">
-            <input type="text" name="Title" class="form-control" id="name" placeholder="Movie Title" required>
+            <input id="title" type="text" name="Title" class="form-control" id="name" placeholder="Movie Title" required>
           </div>
+
           <div class="form-group mt-3">
-            <input type="number" class="form-control" name="email" id="email" placeholder="Duration in minutes" step="0.01" required>
+            <input id="year" type="number" class="form-control" name="email" id="email" placeholder="Year"  required>
+          </div>
+
+          <div class="form-group mt-3">
+            <input id="duration" type="number" class="form-control" name="email" id="email" placeholder="Duration in minutes" step="0.01" required>
           </div>
          
           <div class="form-group mt-3">
-            <select class="form-control" name="subject" id="subject" required>
-              <option>Genre</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
+            <select id="genre" class="form-control" name="subject" id="subject" required>
+              <option value='${Object.values(genreList.data)[1]*1}' selected>${Object.keys(genreList.data)[1]}</option>
+              <option value='${Object.values(genreList.data)[2]*1}' >${Object.keys(genreList.data)[2]}</option>
+              <option value='${Object.values(genreList.data)[3]*1}' >${Object.keys(genreList.data)[3]}</option>
+              <option value='${Object.values(genreList.data)[4]*1}' >${Object.keys(genreList.data)[4]}</option>
+              <option value='${Object.values(genreList.data)[5]*1}' >${Object.keys(genreList.data)[5]}</option>
+              <option value='${Object.values(genreList.data)[6]*1}' >${Object.keys(genreList.data)[6]}</option>
+              <option value='${Object.values(genreList.data)[7]*1}' >${Object.keys(genreList.data)[7]}</option>
+              <option value='${Object.values(genreList.data)[8]*1}' >${Object.keys(genreList.data)[8]}</option>
+              <option value='${Object.values(genreList.data)[9]*1}' >${Object.keys(genreList.data)[9]}</option>
+              <option value='${Object.values(genreList.data)[10]*1}' >${Object.keys(genreList.data)[10]}</option>
+              <option value='${Object.values(genreList.data)[11]*1}' >${Object.keys(genreList.data)[11]}</option>
+              <option value='${Object.values(genreList.data)[12]*1}' >${Object.keys(genreList.data)[12]}</option>
+              <option value='${Object.values(genreList.data)[13]*1}' >${Object.keys(genreList.data)[13]}</option>
+              <option value='${Object.values(genreList.data)[14]*1}' >${Object.keys(genreList.data)[14]}</option>
+              <option value='${Object.values(genreList.data)[15]*1}' >${Object.keys(genreList.data)[15]}</option>
+              <option value='${Object.values(genreList.data)[16]*1}' >${Object.keys(genreList.data)[16]}</option>
+              <option value='${Object.values(genreList.data)[17]*1}' >${Object.keys(genreList.data)[17]}</option>
+              <option value='${Object.values(genreList.data)[18]*1}' >${Object.keys(genreList.data)[18]}</option>
+              <option value='${Object.values(genreList.data)[19]*1}' >${Object.keys(genreList.data)[19]}</option>
+              <option value='${Object.values(genreList.data)[20]*1}' >${Object.keys(genreList.data)[20]}</option>
             </select>
           </div>
           <div class="form-group mt-3">
-            <input type="number" class="form-control" name="message" rows="5" placeholder="Votes" step="0.01" required></input>
+            <input type="number" id="votes" class="form-control" name="message" rows="5" placeholder="Votes" step="0.01" required></input>
           </div>
           <div class="my-3">
             <div class="loading">Loading</div>
             <div class="error-message"></div>
             <div class="sent-message">Your message has been sent. Thank you!</div>
           </div>
-          <div class="text-center"><button type="submit">Send Message</button></div>
-        </form>
+          <div class="text-center"><button id="sendRequest" type="submit">Send Message</button></div>
+          <div id="res" class="text-center">
+            
+          </div>
+        </div>
 
       </div>
 
@@ -58,21 +90,92 @@
   </div>
 </section><!-- End Contact Section -->`
 
+  let algorithm;
+
   tree.addEventListener('click', (e) => {
-      div.innerHTML = ch.replace('%title%','Tree Decision');
+    div.innerHTML = ch.replace('%title%','Tree Decision');
+    algorithm = 'Tree'
+
+    let button = document.getElementById("sendRequest");
+
+    button.addEventListener('click', async (e) => {
+      let title = document.getElementById("title").value
+      let year = document.getElementById("year").value
+      let duration = document.getElementById("duration").value
+      let genre = document.getElementById("genre").value
+      let votes = document.getElementById("votes").value
+  
+      if(year.length > 0 && duration.length > 0 && genre.length > 0 && votes.length > 0 && title.length > 0){
+        let res = await axios.post(`http://localhost:5000/${algorithm}/${year}/${duration}/${genre}/${votes}`)
+        console.log(res.data)
+        document.getElementById("res").innerHTML = `<div class="alert alert-success mt-4" role="alert">
+        ${title} ${res.data}
+      </div>`
+      }
+      
+    })
+
   })
 
   knn.addEventListener('click', (e) => {
     div.innerHTML = ch.replace('%title%','K-Nearest Neighbors');
+    algorithm = 'KNN'
+
+    let button = document.getElementById("sendRequest");
+
+    button.addEventListener('click', async (e) => {
+      let title = document.getElementById("title").value
+      let year = document.getElementById("year").value
+      let duration = document.getElementById("duration").value
+      let genre = document.getElementById("genre").value
+      let votes = document.getElementById("votes").value
+  
+      if(year.length > 0 && duration.length > 0 && genre.length > 0 && votes.length > 0 && title.length > 0){
+        let res = await axios.post(`http://localhost:5000/${algorithm}/${year}/${duration}/${genre}/${votes}`)
+        console.log(res.data)
+        document.getElementById("res").innerHTML = `<div class="alert alert-success mt-4" role="alert">
+        ${title} ${res.data}
+      </div>`
+      }
+      
+    })
+
   })
 
   bayes.addEventListener('click', (e) => {
     div.innerHTML = ch.replace('%title%','Naive Bayes');
+    algorithm = 'Naive_bayes'
+
+    let button = document.getElementById("sendRequest");
+
+    button.addEventListener('click', async (e) => {
+      let title = document.getElementById("title").value
+      let year = document.getElementById("year").value
+      let duration = document.getElementById("duration").value
+      let genre = document.getElementById("genre").value
+      let votes = document.getElementById("votes").value
+  
+      if(year.length > 0 && duration.length > 0 && genre.length > 0 && votes.length > 0 && title.length > 0){
+        let res = await axios.post(`http://localhost:5000/${algorithm}/${year}/${duration}/${genre}/${votes}`)
+        console.log(res.data)
+        document.getElementById("res").innerHTML = `<div class="alert alert-success mt-4" role="alert">
+        ${title} ${res.data}
+      </div>`
+      }
+      
+    })
+
   })
 
   means.addEventListener('click', (e) => {
     div.innerHTML = ch.replace('%title%','K-Means');
   })
+
+  
+  
+
+
+
 
   /**
    * Easy selector helper function

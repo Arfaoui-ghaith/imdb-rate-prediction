@@ -59,7 +59,11 @@ class Preprocessing:
 
         genre = LabelEncoder()
         self.data['Genre']=genre.fit_transform(self.data['Genre'])
+        self.genreList = [self.data['Genre'].unique(),genre.inverse_transform(self.data['Genre'].unique())]
 
     def getData(self):
         return self.data
+    
+    def getGenre(self):
+        return self.genreList
 
