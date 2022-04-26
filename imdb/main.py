@@ -6,7 +6,7 @@ from flask import Flask, request, jsonify, render_template
 from flask_restful import Resource, Api
 import os
 import json
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app, resources={r"*": {"origins": "*"}})
